@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfu.MNISTRecognizer.WinMord
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfu.MNISTRecognizer.MNISTWorker", "Sfu.MNISTRecognizer.MNISTWorker\Sfu.MNISTRecognizer.MNISTWorker.csproj", "{60F1B875-DCFF-4379-8F68-3D5B85362D25}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfu.MNISTRecognizer.UnitTests", "Sfu.MNISTRecognizer.UnitTests\Sfu.MNISTRecognizer.UnitTests.csproj", "{47ECE463-A9F6-471A-A33D-F7C1D53955E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{60F1B875-DCFF-4379-8F68-3D5B85362D25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60F1B875-DCFF-4379-8F68-3D5B85362D25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60F1B875-DCFF-4379-8F68-3D5B85362D25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47ECE463-A9F6-471A-A33D-F7C1D53955E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47ECE463-A9F6-471A-A33D-F7C1D53955E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47ECE463-A9F6-471A-A33D-F7C1D53955E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47ECE463-A9F6-471A-A33D-F7C1D53955E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

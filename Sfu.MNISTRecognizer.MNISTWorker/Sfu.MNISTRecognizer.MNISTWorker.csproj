@@ -44,5 +44,11 @@
     <Compile Include="MNISTDataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sfu.MNISTRecognizer.WinMords\Sfu.MNISTRecognizer.WinMords.csproj">
+      <Project>{7081C0D8-7607-47E1-A26C-FD9A03864BDA}</Project>
+      <Name>Sfu.MNISTRecognizer.WinMords</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
