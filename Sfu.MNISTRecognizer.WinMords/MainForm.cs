@@ -16,5 +16,12 @@ namespace Sfu.MNISTRecognizer.WinMords
         {
             InitializeComponent();
         }
+
+        private void btnTestMNISTData_Click(object sender, EventArgs e)
+        {
+            Hide();
+            new MNISTTestDataForm().ShowDialog();
+            Show();
+        }
     }
 }

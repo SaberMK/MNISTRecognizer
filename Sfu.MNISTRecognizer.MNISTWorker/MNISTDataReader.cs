@@ -1,5 +1,4 @@
-﻿using Sfu.MNISTRecognizer.WinMords;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,19 +12,23 @@ namespace Sfu.MNISTRecognizer.MNISTWorker
         private FileStream _mnistImagesReader;
         private FileStream _mnistLabelsReader;
 
-        private int _totalCount;
-        private int _rows;
-        private int _columns;
+        public int TotalCount { get; private set; }
+        public int Rows { get; private set; }
+        public int Columns { get; private set; }
 
         public void Load(string imagesFilePath, string labelsFilePath)
         {
-            var baseFolder = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\"));
-            
-            baseFolder =  Path.Combine(baseFolder, @"Sfu.MNISTRecognizer.WinMords\bin\Debug\TrainingData");
+            //var baseFolder = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\"));
 
+            //baseFolder =  Path.Combine(baseFolder, @"Sfu.MNISTRecognizer.WinMords\bin\Debug\TrainingData");
+
+            //imagesFilePath = Path.Combine(baseFolder, imagesFilePath);
+            //labelsFilePath = Path.Combine(baseFolder, labelsFilePath);
+
+            var baseFolder = AppDomain.CurrentDomain.BaseDirectory;
             imagesFilePath = Path.Combine(baseFolder, imagesFilePath);
             labelsFilePath = Path.Combine(baseFolder, labelsFilePath);
-            
+
             if (!File.Exists(imagesFilePath))
                 throw new FileNotFoundException($"Images file {imagesFilePath} not found!");
 
@@ -40,23 +43,23 @@ namespace Sfu.MNISTRecognizer.MNISTWorker
 
         public (byte[,], int) GetImage(int id)
         {
-            if (id < 0 || id >= _totalCount)
+            if (id < 0 || id >= TotalCount)
                 throw new ArgumentOutOfRangeException($"Id must be greater than zero and less than total number. Current: {id}");
 
             if (_mnistImagesReader == null || _mnistLabelsReader == null)
                 throw new ArgumentNullException("You need to perform Load(imagepath, labelpath) method first!");
             
-            var image = new byte[_rows, _columns];
-            var imageSize = _rows * _columns;
+            var image = new byte[Rows, Columns];
+            var imageSize = Rows * Columns;
 
             _mnistLabelsReader.Position = MNIST_LABELS_DATA_OFFSET + id;
             var label = (byte)_mnistLabelsReader.ReadByte();
 
             _mnistImagesReader.Position = MNIST_IMAGE_DATA_OFFSET + imageSize * id;
 
-            for (var i = 0; i < _rows; ++i)
-                for (var j = 0; j < _columns; ++j)
-                    image[i, j] = (byte)(_mnistImagesReader.ReadByte() > 0 ? 1 : 0);
+            for (var i = 0; i < Rows; ++i)
+                for (var j = 0; j < Columns; ++j)
+                    image[j, i] = (byte)(_mnistImagesReader.ReadByte() > 0 ? 1 : 0);
 
             return (image, label);
         }
@@ -79,17 +82,17 @@ namespace Sfu.MNISTRecognizer.MNISTWorker
 
 
             _mnistImagesReader.Read(buff, 0, 4);
-            _totalCount = BitConverter.ToInt32(buff.Reverse().ToArray(), 0);
+            TotalCount = BitConverter.ToInt32(buff.Reverse().ToArray(), 0);
 
             _mnistLabelsReader.Read(buff, 0, 4);
-            if (_totalCount != BitConverter.ToInt32(buff.Reverse().ToArray(), 0))
+            if (TotalCount != BitConverter.ToInt32(buff.Reverse().ToArray(), 0))
                 throw new InvalidDataException("Files containment are different");
 
             _mnistImagesReader.Read(buff, 0, 4);
-            _rows = BitConverter.ToInt32(buff.Reverse().ToArray(), 0);
+            Rows = BitConverter.ToInt32(buff.Reverse().ToArray(), 0);
 
             _mnistImagesReader.Read(buff, 0, 4);
-            _columns = BitConverter.ToInt32(buff.Reverse().ToArray(), 0);
+            Columns = BitConverter.ToInt32(buff.Reverse().ToArray(), 0);
         }
 
         ~MNISTDataReader()
