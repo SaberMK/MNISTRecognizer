@@ -41,7 +41,7 @@ namespace Sfu.MNISTRecognizer.MNISTWorker
             LoadMetadata();
         }
 
-        public (byte[,], int) GetImage(int id)
+        public (byte[,], int) GetImage(int id, bool loadBinary = false)
         {
             if (id < 0 || id >= TotalCount)
                 throw new ArgumentOutOfRangeException($"Id must be greater than zero and less than total number. Current: {id}");
@@ -58,8 +58,16 @@ namespace Sfu.MNISTRecognizer.MNISTWorker
             _mnistImagesReader.Position = MNIST_IMAGE_DATA_OFFSET + imageSize * id;
 
             for (var i = 0; i < Rows; ++i)
-                for (var j = 0; j < Columns; ++j)
-                    image[j, i] = (byte)(_mnistImagesReader.ReadByte() > 0 ? 1 : 0);
+            for (var j = 0; j < Columns; ++j)
+            {
+                var result = _mnistImagesReader.ReadByte();
+
+                if (loadBinary)
+                    result = result > 0 ? 1 : 0;
+
+                image[j, i] = (byte)result;
+            }
+             
 
             return (image, label);
         }
