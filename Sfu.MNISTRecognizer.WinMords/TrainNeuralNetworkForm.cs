@@ -20,8 +20,8 @@ namespace Sfu.MNISTRecognizer.WinMords
     public partial class TrainNeuralNetworkForm : Form
     {
         private readonly MLContext _mlContext;
-        private readonly MNISTDataReader _mnistTrain;
-        private readonly MNISTDataReader _mnistTest;
+        private readonly MNISTDataReader _mnistTrain = new MNISTDataReader();
+        private readonly MNISTDataReader _mnistTest = new MNISTDataReader();
 
         public TrainNeuralNetworkForm()
         {
@@ -43,6 +43,7 @@ namespace Sfu.MNISTRecognizer.WinMords
         private void btnTrainNN_Click(object sender, EventArgs e)
         {
             Train();
+            MessageBox.Show("Done!");
         }
 
         private void Train()

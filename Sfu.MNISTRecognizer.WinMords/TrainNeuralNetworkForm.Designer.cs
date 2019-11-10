@@ -30,14 +30,14 @@
         {
             this.btnTrainNN = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtTrainImagesPath = new System.Windows.Forms.TextBox();
-            this.lblCount = new System.Windows.Forms.Label();
-            this.txtTrainLabelsPath = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtTestLabelsPath = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtTestImagesPath = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtTrainLabelsPath = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtTrainImagesPath = new System.Windows.Forms.TextBox();
+            this.lblCount = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtGeneratedModelPath = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -76,42 +76,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datasets";
             // 
-            // txtTrainImagesPath
-            // 
-            this.txtTrainImagesPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtTrainImagesPath.Location = new System.Drawing.Point(15, 78);
-            this.txtTrainImagesPath.Name = "txtTrainImagesPath";
-            this.txtTrainImagesPath.Size = new System.Drawing.Size(271, 31);
-            this.txtTrainImagesPath.TabIndex = 5;
-            // 
-            // lblCount
-            // 
-            this.lblCount.AutoSize = true;
-            this.lblCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblCount.Location = new System.Drawing.Point(10, 37);
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(136, 25);
-            this.lblCount.TabIndex = 4;
-            this.lblCount.Text = "Train Images";
-            // 
-            // txtTrainLabelsPath
-            // 
-            this.txtTrainLabelsPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtTrainLabelsPath.Location = new System.Drawing.Point(15, 163);
-            this.txtTrainLabelsPath.Name = "txtTrainLabelsPath";
-            this.txtTrainLabelsPath.Size = new System.Drawing.Size(271, 31);
-            this.txtTrainLabelsPath.TabIndex = 7;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(10, 122);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 25);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Train Labels";
-            // 
             // txtTestLabelsPath
             // 
             this.txtTestLabelsPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -148,6 +112,42 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Test Images";
             // 
+            // txtTrainLabelsPath
+            // 
+            this.txtTrainLabelsPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtTrainLabelsPath.Location = new System.Drawing.Point(15, 163);
+            this.txtTrainLabelsPath.Name = "txtTrainLabelsPath";
+            this.txtTrainLabelsPath.Size = new System.Drawing.Size(271, 31);
+            this.txtTrainLabelsPath.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(10, 122);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(131, 25);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Train Labels";
+            // 
+            // txtTrainImagesPath
+            // 
+            this.txtTrainImagesPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtTrainImagesPath.Location = new System.Drawing.Point(15, 78);
+            this.txtTrainImagesPath.Name = "txtTrainImagesPath";
+            this.txtTrainImagesPath.Size = new System.Drawing.Size(271, 31);
+            this.txtTrainImagesPath.TabIndex = 5;
+            // 
+            // lblCount
+            // 
+            this.lblCount.AutoSize = true;
+            this.lblCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblCount.Location = new System.Drawing.Point(10, 37);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(136, 25);
+            this.lblCount.TabIndex = 4;
+            this.lblCount.Text = "Train Images";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.txtGeneratedModelPath);
@@ -158,7 +158,7 @@
             this.groupBox2.Size = new System.Drawing.Size(366, 128);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Datasets";
+            this.groupBox2.Text = "Out Model";
             // 
             // txtGeneratedModelPath
             // 

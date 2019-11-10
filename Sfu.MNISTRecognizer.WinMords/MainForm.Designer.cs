@@ -32,6 +32,7 @@
             this.btnTrainNN = new System.Windows.Forms.Button();
             this.picDrawingImage = new System.Windows.Forms.PictureBox();
             this.btnClear = new System.Windows.Forms.Button();
+            this.rtbOutput = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawingImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,7 +41,7 @@
             this.btnTestMNISTData.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnTestMNISTData.Location = new System.Drawing.Point(12, 12);
             this.btnTestMNISTData.Name = "btnTestMNISTData";
-            this.btnTestMNISTData.Size = new System.Drawing.Size(286, 40);
+            this.btnTestMNISTData.Size = new System.Drawing.Size(183, 40);
             this.btnTestMNISTData.TabIndex = 0;
             this.btnTestMNISTData.Text = "Test MNIST Data...";
             this.btnTestMNISTData.UseVisualStyleBackColor = true;
@@ -49,9 +50,9 @@
             // btnTrainNN
             // 
             this.btnTrainNN.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnTrainNN.Location = new System.Drawing.Point(12, 58);
+            this.btnTrainNN.Location = new System.Drawing.Point(201, 12);
             this.btnTrainNN.Name = "btnTrainNN";
-            this.btnTrainNN.Size = new System.Drawing.Size(286, 40);
+            this.btnTrainNN.Size = new System.Drawing.Size(215, 40);
             this.btnTrainNN.TabIndex = 1;
             this.btnTrainNN.Text = "Train Neural Network...";
             this.btnTrainNN.UseVisualStyleBackColor = true;
@@ -59,7 +60,7 @@
             // 
             // picDrawingImage
             // 
-            this.picDrawingImage.Location = new System.Drawing.Point(309, 12);
+            this.picDrawingImage.Location = new System.Drawing.Point(422, 12);
             this.picDrawingImage.Name = "picDrawingImage";
             this.picDrawingImage.Size = new System.Drawing.Size(280, 280);
             this.picDrawingImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -74,16 +75,28 @@
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnClear.Location = new System.Drawing.Point(12, 252);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(286, 40);
+            this.btnClear.Size = new System.Drawing.Size(404, 40);
             this.btnClear.TabIndex = 3;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // rtbOutput
+            // 
+            this.rtbOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rtbOutput.Location = new System.Drawing.Point(12, 58);
+            this.rtbOutput.Name = "rtbOutput";
+            this.rtbOutput.Size = new System.Drawing.Size(404, 188);
+            this.rtbOutput.TabIndex = 4;
+            this.rtbOutput.Text = "";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(597, 299);
+            this.ClientSize = new System.Drawing.Size(709, 299);
+            this.Controls.Add(this.rtbOutput);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.picDrawingImage);
             this.Controls.Add(this.btnTrainNN);
@@ -104,6 +117,7 @@
         private System.Windows.Forms.Button btnTrainNN;
         private System.Windows.Forms.PictureBox picDrawingImage;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.RichTextBox rtbOutput;
     }
 }
 
