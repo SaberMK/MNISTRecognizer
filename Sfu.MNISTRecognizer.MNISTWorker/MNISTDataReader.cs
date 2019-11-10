@@ -66,7 +66,9 @@ namespace Sfu.MNISTRecognizer.MNISTWorker
                     var result = _mnistImagesReader.ReadByte();
 
                     if (loadBinary)
+                    {
                         result = result > 0 ? 1 : 0;
+                    }
 
                     image[j, i] = (byte)result;
                 }

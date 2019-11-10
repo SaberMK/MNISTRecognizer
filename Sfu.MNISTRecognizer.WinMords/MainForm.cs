@@ -74,76 +74,78 @@ namespace Sfu.MNISTRecognizer.WinMords
         {
             #region TEST 2222222222222222222222222222222222222222
 
-            LoadSet(@"TrainingData\t10k-images.idx3-ubyte", @"TrainingData\t10k-labels.idx1-ubyte");
-            LoadSet(@"TrainingData\t10k-images.idx3-ubyte", @"TrainingData\t10k-labels.idx1-ubyte");
-            LoadSet(@"TrainingData\train-images.idx3-ubyte", @"TrainingData\train-labels.idx1-ubyte");
+            //LoadSet(@"TrainingData\t10k-images.idx3-ubyte", @"TrainingData\t10k-labels.idx1-ubyte");
+            //LoadSet(@"TrainingData\t10k-images.idx3-ubyte", @"TrainingData\t10k-labels.idx1-ubyte");
+            //LoadSet(@"TrainingData\train-images.idx3-ubyte", @"TrainingData\train-labels.idx1-ubyte");
 
-            var bitmap = new Bitmap(_dataReader.Rows, _dataReader.Columns);
+            //var bitmap = new Bitmap(_dataReader.Rows, _dataReader.Columns);
 
-            // TODO Add Checks to txtImageId_TextChanged()
-            var r = new Random();
-            var id = r.Next(0, 4000);
+            //// TODO Add Checks to txtImageId_TextChanged()
+            //var r = new Random();
+            //var id = r.Next(0, 4000);
 
-            var (byteImage, label) = _dataReader.GetImage(id);
-            //////////lblChoosenMNISTLabel.Text = label.ToString();
+            //var (byteImage, label) = _dataReader.GetImage(id);
+            ////////////lblChoosenMNISTLabel.Text = label.ToString();
 
-            for (var i = 0; i < _dataReader.Rows; ++i)
-            {
-                for (var j = 0; j < _dataReader.Columns; ++j)
-                {
-                    bitmap.SetPixel(i, j,
-                        byteImage[i, j] == 0 ? Color.White : Color.Black
-                        );
-                }
-            }
-
-            //picNumber.Image = bitmap;
-            picDrawingImage.Image = _drawArea = bitmap;
-            #endregion
-
-
-
-            return GeeeeeeeeeeeeeeeeeeeetModel(byteImage /*, label*/);
-
-
-
-            //
-            //
-            //  MAKE METHOD GREAT AGAIN!!
-            //
-            //
-            //var size = _drawArea.Width * _drawArea.Height;
-
-            //var line = new float[size];
-            //var currentPosition = 0;
-            //for (int x = 0; x < _drawArea.Width; ++x)
+            //for (var i = 0; i < _dataReader.Rows; ++i)
             //{
-            //    for (int y = 0; y < _drawArea.Height; ++y)
+            //    for (var j = 0; j < _dataReader.Columns; ++j)
             //    {
-            //        var rgb = _drawArea.GetPixel(y, x);
-            //        if (rgb.R == 255 && rgb.G == 255 && rgb.B == 255) // if black
-            //        {
-            //            line[currentPosition] = 0;
-            //        }
-            //        else
-            //        {
-            //            line[currentPosition] = 255;
-            //        }
+            //        bitmap.SetPixel(i, j,
+            //            byteImage[i, j] == 0 ? Color.White : Color.Black
+            //            );
 
-            //        Console.Write($"{line[currentPosition]}\t");
 
-            //        currentPosition++;
+            //        // TEST
+            //        ///////////////byteImage[i, j] = byteImage[i, j] > 0 ? (byte)254 : (byte)0;
+
+
+            //        Console.Write($"{byteImage[i, j]}\t");
             //    }
             //    Console.Write('\n');
             //}
 
-            //return new InputData
-            //{
-            //    PixelValues = line
-            //};
+            //picDrawingImage.Image = _drawArea = bitmap;
+
+            //return GeeeeeeeeeeeeeeeeeeeetModel(byteImage);
+            #endregion
+
+
+
+
+
+
+            var size = _drawArea.Width * _drawArea.Height;
+
+            var byteImage = new byte[_drawArea.Width, _drawArea.Height];
+
+            //////////var line = new float[size];
+            var currentPosition = 0;
+            for (int x = 0; x < _drawArea.Width; ++x)
+            {
+                for (int y = 0; y < _drawArea.Height; ++y)
+                {
+                    var rgb = _drawArea.GetPixel(x, y);
+                    if (rgb.R == 255 && rgb.G == 255 && rgb.B == 255) // if white
+                    {
+                        ////////line[currentPosition] = 0;
+                        byteImage[x, y] = 0;
+                    }
+                    else
+                    {
+                        ////////line[currentPosition] = 254;
+                        byteImage[x, y] = 254;
+                    }
+
+                    Console.Write($"{byteImage[x, y]}\t"); // DEBUG
+
+                    currentPosition++;
+                }
+                Console.Write('\n');// DEBUG
+            }
+
+            return GeeeeeeeeeeeeeeeeeeeetModel(byteImage);
         }
-
-
 
 
         private static InputData GeeeeeeeeeeeeeeeeeeeetModel(byte[,] data)
@@ -166,7 +168,6 @@ namespace Sfu.MNISTRecognizer.WinMords
             return new InputData
             {
                 PixelValues = currentLine,
-                //Number = (byte)label
             };
         }
 
@@ -233,7 +234,16 @@ namespace Sfu.MNISTRecognizer.WinMords
 
             if (_isMouseDown == true && _lastPoint != null)
             {
-                _drawArea.SetPixel(updatedPoint.X, updatedPoint.Y, Color.Black);
+                //_drawArea.SetPixel(updatedPoint.X, updatedPoint.Y, Color.Black);
+
+                for (int x = updatedPoint.X - 1; x < updatedPoint.X + 1; ++x)
+                {
+                    for (int y = updatedPoint.Y - 1; y < updatedPoint.Y + 1; ++y)
+                    {
+                        _drawArea.SetPixel(x, y, Color.Black);
+
+                    }
+                }
             }
 
             picDrawingImage.Invalidate();
