@@ -44,7 +44,7 @@ namespace Sfu.MNISTRecognizer.WinMords
         {
             _dataReader = new MNISTDataReader();
             _dataReader.Load(images, labels);
-            
+
             // TODO Better output
             lblCount.Text = $"Id 0...{_dataReader.TotalCount - 1}";
             txtImageId.Text = "0";
@@ -61,10 +61,14 @@ namespace Sfu.MNISTRecognizer.WinMords
             lblChoosenMNISTLabel.Text = label.ToString();
 
             for (var i = 0; i < _dataReader.Rows; ++i)
+            {
                 for (var j = 0; j < _dataReader.Columns; ++j)
+                {
                     bitmap.SetPixel(i, j,
                         byteImage[i, j] == 0 ? Color.White : Color.Black
                         );
+                }
+            }
 
             picNumber.Image = bitmap;
         }

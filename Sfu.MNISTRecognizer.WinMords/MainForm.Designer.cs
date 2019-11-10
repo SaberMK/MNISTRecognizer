@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btnTestMNISTData = new System.Windows.Forms.Button();
             this.btnTrainNN = new System.Windows.Forms.Button();
             this.picDrawingImage = new System.Windows.Forms.PictureBox();
@@ -60,7 +61,9 @@
             // 
             // picDrawingImage
             // 
-            this.picDrawingImage.Location = new System.Drawing.Point(422, 12);
+            this.picDrawingImage.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.picDrawingImage.BackColor = System.Drawing.Color.White;
+            this.picDrawingImage.Location = new System.Drawing.Point(422, 80);
             this.picDrawingImage.Name = "picDrawingImage";
             this.picDrawingImage.Size = new System.Drawing.Size(280, 280);
             this.picDrawingImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -72,8 +75,9 @@
             // 
             // btnClear
             // 
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnClear.Location = new System.Drawing.Point(12, 252);
+            this.btnClear.Location = new System.Drawing.Point(12, 387);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(404, 40);
             this.btnClear.TabIndex = 3;
@@ -83,11 +87,13 @@
             // 
             // rtbOutput
             // 
+            this.rtbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.rtbOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rtbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rtbOutput.Location = new System.Drawing.Point(12, 58);
             this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.Size = new System.Drawing.Size(404, 188);
+            this.rtbOutput.Size = new System.Drawing.Size(404, 323);
             this.rtbOutput.TabIndex = 4;
             this.rtbOutput.Text = "";
             // 
@@ -95,12 +101,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(709, 299);
+            this.ClientSize = new System.Drawing.Size(709, 434);
             this.Controls.Add(this.rtbOutput);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.picDrawingImage);
             this.Controls.Add(this.btnTrainNN);
             this.Controls.Add(this.btnTestMNISTData);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";

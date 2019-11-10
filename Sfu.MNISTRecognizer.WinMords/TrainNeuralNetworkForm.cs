@@ -23,6 +23,9 @@ namespace Sfu.MNISTRecognizer.WinMords
         private readonly MNISTDataReader _mnistTrain = new MNISTDataReader();
         private readonly MNISTDataReader _mnistTest = new MNISTDataReader();
 
+
+
+
         public TrainNeuralNetworkForm()
         {
             InitializeComponent();
@@ -42,8 +45,12 @@ namespace Sfu.MNISTRecognizer.WinMords
 
         private void btnTrainNN_Click(object sender, EventArgs e)
         {
-            Train();
-            MessageBox.Show("Done!");
+            Task.Run(() =>
+                {
+                    Train();
+                    MessageBox.Show("Done!");
+                }
+            );
         }
 
         private void Train()
@@ -86,7 +93,7 @@ namespace Sfu.MNISTRecognizer.WinMords
             // System.Console.WriteLine("===== Evaluating Model's accuracy with Test data =====");
             var predictions = trainedModel.Transform(testData);
             var metrics = _mlContext.MulticlassClassification.Evaluate(data: predictions, labelColumnName: "Number", scoreColumnName: "Score");
-            
+
             var whereToSaveModel = txtGeneratedModelPath.Text;
             _mlContext.Model.Save(trainedModel, trainData.Schema, whereToSaveModel);
 
@@ -116,30 +123,6 @@ namespace Sfu.MNISTRecognizer.WinMords
             }
 
             File.WriteAllLines(filename, allData);
-        }
-
-        private static InputData GetModel(MNISTDataReader mnist, int index)
-        {
-            var (data, label) = mnist.GetImage(index);
-
-            var size = mnist.Rows * mnist.Columns;
-
-            var currentLine = new float[size];
-            var currentPosition = 0;
-            for (int x = 0; x < mnist.Rows; ++x)
-            {
-                for (int y = 0; y < mnist.Columns; ++y)
-                {
-                    currentLine[currentPosition] = data[x, y];
-                    currentPosition++;
-                }
-            }
-
-            return new InputData
-            {
-                PixelValues = currentLine,
-                Number = (byte)label
-            };
         }
     }
 }

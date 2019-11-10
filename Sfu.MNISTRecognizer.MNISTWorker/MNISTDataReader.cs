@@ -16,6 +16,9 @@ namespace Sfu.MNISTRecognizer.MNISTWorker
         public int Rows { get; private set; }
         public int Columns { get; private set; }
 
+
+
+
         public void Load(string imagesFilePath, string labelsFilePath)
         {
             //var baseFolder = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\"));
@@ -37,7 +40,7 @@ namespace Sfu.MNISTRecognizer.MNISTWorker
 
             _mnistImagesReader = new FileStream(imagesFilePath, FileMode.Open, FileAccess.Read);
             _mnistLabelsReader = new FileStream(labelsFilePath, FileMode.Open, FileAccess.Read);
-            
+
             LoadMetadata();
         }
 
@@ -48,7 +51,7 @@ namespace Sfu.MNISTRecognizer.MNISTWorker
 
             if (_mnistImagesReader == null || _mnistLabelsReader == null)
                 throw new ArgumentNullException("You need to perform Load(imagepath, labelpath) method first!");
-            
+
             var image = new byte[Rows, Columns];
             var imageSize = Rows * Columns;
 
@@ -58,16 +61,15 @@ namespace Sfu.MNISTRecognizer.MNISTWorker
             _mnistImagesReader.Position = MNIST_IMAGE_DATA_OFFSET + imageSize * id;
 
             for (var i = 0; i < Rows; ++i)
-            for (var j = 0; j < Columns; ++j)
-            {
-                var result = _mnistImagesReader.ReadByte();
+                for (var j = 0; j < Columns; ++j)
+                {
+                    var result = _mnistImagesReader.ReadByte();
 
-                if (loadBinary)
-                    result = result > 0 ? 1 : 0;
+                    if (loadBinary)
+                        result = result > 0 ? 1 : 0;
 
-                image[j, i] = (byte)result;
-            }
-             
+                    image[j, i] = (byte)result;
+                }
 
             return (image, label);
         }
