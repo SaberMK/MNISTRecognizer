@@ -1,5 +1,5 @@
 # MNISTRecognizer
-Readme placeholder (would fill it sometime...)
+x64 only.
 
 ## TrainingData
 ref: http://yann.lecun.com/exdb/mnist/
