@@ -1,5 +1,6 @@
 ﻿using Microsoft.ML;
 using Microsoft.ML.Data;
+using Microsoft.ML.Trainers;
 using Microsoft.ML.Transforms;
 using Sfu.MNISTRecognizer.MNISTWorker;
 using Sfu.MNISTRecognizer.WinMords.Configs;
@@ -42,7 +43,6 @@ namespace Sfu.MNISTRecognizer.WinMords
             txtGeneratedModelPath.Text = DefaultFilepathesConfig.ModelPath;
         }
 
-
         private void btnTrainNN_Click(object sender, EventArgs e)
         {
             Task.Run(() =>
@@ -50,7 +50,13 @@ namespace Sfu.MNISTRecognizer.WinMords
                     Train();
                     MessageBox.Show("Done!");
                 }
-            );
+            ).ContinueWith((task) => 
+            {
+                if (task.IsFaulted || task.IsCanceled)
+                {
+                    MessageBox.Show($"task Faulted or Canceled, Exception message: '{task.Exception.Message}'");
+                }
+            });
         }
 
         private void Train()
@@ -83,9 +89,20 @@ namespace Sfu.MNISTRecognizer.WinMords
 
             var dataProcessPipeline = _mlContext.Transforms.Conversion.MapValueToKey("Label", "Number", keyOrdinality: ValueToKeyMappingEstimator.KeyOrdinality.ByValue).
                    Append(_mlContext.Transforms.Concatenate("Features", nameof(InputData.PixelValues)).AppendCacheCheckpoint(_mlContext));
+            //var trainer = _mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy(labelColumnName: "Label", featureColumnName: "Features");
+            //var trainingPipeline = dataProcessPipeline.Append(trainer).Append(_mlContext.Transforms.Conversion.MapKeyToValue("Number", "Label"));
 
-            var trainer = _mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy(labelColumnName: "Label", featureColumnName: "Features");
-            var trainingPipeline = dataProcessPipeline.Append(trainer).Append(_mlContext.Transforms.Conversion.MapKeyToValue("Number", "Label"));
+            #region // test ref: https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet/customers/brenmor
+
+            var trainer = _mlContext.MulticlassClassification.Trainers.PairwiseCoupling(
+                _mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy(labelColumnName: "Label", featureColumnName: "Features"),
+                labelColumnName: "Label")
+                .Append(_mlContext.Transforms.Conversion.MapValueToKey("Label", "Number", keyOrdinality: ValueToKeyMappingEstimator.KeyOrdinality.ByValue)
+                .Append(_mlContext.Transforms.Concatenate("Features", nameof(InputData.PixelValues)).AppendCacheCheckpoint(_mlContext))
+                );
+            var trainingPipeline = dataProcessPipeline.Append(trainer);
+            #endregion
+
 
             // System.Console.WriteLine("=============== Training the model ===============");
             ITransformer trainedModel = trainingPipeline.Fit(trainData);
